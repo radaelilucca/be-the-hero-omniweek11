@@ -31,6 +31,12 @@ class OngController {
 
     return res.json(id);
   }
+
+  async index(req, res) {
+    const ongs = await Ong.findAll();
+
+    return res.json(ongs);
+  }
 }
 
 export default new OngController();

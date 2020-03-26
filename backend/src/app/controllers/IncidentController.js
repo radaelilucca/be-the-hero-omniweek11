@@ -28,7 +28,6 @@ class IncidentController {
   async delete(req, res) {
     const { incident_id } = req.params;
     const incident = await Incident.findByPk(incident_id);
-    console.log(req.ongId);
 
     // check if incident exist
     if (!incident) {
@@ -47,13 +46,16 @@ class IncidentController {
         .json({ error: 'This incident was not created by the logged ONG.' });
     }
 
-    incident.canceled_at = new Date();
+    await incident.destroy();
 
-    console.log(incident);
+    return res.status(204).send();
+  }
 
-    await incident.save();
+  // list all incidents
+  async index(req, res) {
+    const incidents = await Incident.findAll();
 
-    return res.json(incident);
+    return res.json(incidents);
   }
 }
 
