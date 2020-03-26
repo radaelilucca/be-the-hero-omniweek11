@@ -3,10 +3,11 @@ import 'dotenv/config';
 import Sequelize from 'sequelize';
 
 import Ong from '../app/models/Ong';
+import Incident from '../app/models/Incident';
 
 import databaseConfig from '../config/database';
 
-const models = [Ong];
+const models = [Ong, Incident];
 
 class Database {
   constructor() {

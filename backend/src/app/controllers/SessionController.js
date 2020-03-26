@@ -11,8 +11,6 @@ class SessionController {
 
     const ong = await Ong.findByPk(id);
 
-    console.log(ong);
-
     if (!ong) {
       return res
         .status(404)
