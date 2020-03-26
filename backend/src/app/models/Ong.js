@@ -6,9 +6,9 @@ class Ong extends Model {
       {
         name: Sequelize.STRING,
         email: Sequelize.STRING,
-        whatsapp: Sequelize.VIRTUAL,
+        whatsapp: Sequelize.STRING,
         city: Sequelize.STRING,
-        uf: Sequelize.BOOLEAN,
+        uf: Sequelize.STRING,
       },
       {
         sequelize,
