@@ -5,7 +5,9 @@ class IncidentController {
   async store(req, res) {
     const { title, description, amount } = req.body;
 
-    const ong = await Ong.findByPk(req.ongId);
+    const ongId = req.headers.authorization;
+
+    const ong = await Ong.findByPk(ongId);
 
     // check the logged ong
 
@@ -27,6 +29,7 @@ class IncidentController {
 
   async delete(req, res) {
     const { incident_id } = req.params;
+    // const ongId = req.headers.authorization;
     const incident = await Incident.findByPk(incident_id);
 
     // check if incident exist
@@ -36,16 +39,6 @@ class IncidentController {
         .json({ error: 'Incident not found - Check the ID and try again' });
     }
 
-    const ong = await Ong.findByPk(req.ongId);
-
-    // check if the incident belongs to the logged ong
-
-    if (incident.ong_id !== ong.id) {
-      return res
-        .status(401)
-        .json({ error: 'This incident was not created by the logged ONG.' });
-    }
-
     await incident.destroy();
 
     return res.status(204).send();
@@ -53,7 +46,11 @@ class IncidentController {
 
   // list all incidents
   async index(req, res) {
-    const incidents = await Incident.findAll();
+    const { page = 1 } = req.query;
+    const incidents = await Incident.findAll({
+      order: ['created_at'],
+      offset: (page - 1) * 20,
+    });
 
     return res.json(incidents);
   }

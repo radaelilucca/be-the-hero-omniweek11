@@ -24,13 +24,14 @@ routes.get('/incidents/', IncidentController.index);
 // ------------------- Login required routes ---------------------
 routes.use(authMiddleware);
 
+routes.delete('/incidents/delete/:incident_id', IncidentController.delete);
 // List all ongs
 routes.get('/ongs', OngController.index);
 // Create incident
 routes.post('/incidents/create', IncidentController.store);
+
 // List incidents of logged ong
 routes.get('/profile', ProfileController.index);
 // Delete / finish incident
-routes.delete('/incidents/delete/:incident_id', IncidentController.delete);
 
 export default routes;
