@@ -12,7 +12,12 @@ import api from '../../services/api';
 
 export default function Profile() {
   const [incidents, setIncidents] = useState([]);
+
   const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState();
+
+  const ongName = localStorage.getItem('ongName');
+  const history = useHistory();
 
   function loadIncidents() {
     api
@@ -20,27 +25,14 @@ export default function Profile() {
         params: { page },
       })
       .then((response) => {
-        setIncidents(response.data);
-        if (!response.data) {
-          setPage(page - 1);
-        }
+        setIncidents(response.data.rows);
+        setTotalPage(response.data.count / 4);
       });
   }
 
-  const history = useHistory();
-
-  const ongName = localStorage.getItem('ongName');
-  if (!ongName) {
-    history.push('/');
-  }
-
-  // Get icidents
-  useEffect(() => {
-    loadIncidents();
-  }, [page]);
-
   async function handleLogout(e) {
     localStorage.clear();
+    history.push('/');
   }
 
   async function handleDeleteIncident(id, title) {
@@ -60,13 +52,19 @@ export default function Profile() {
     }
   }
 
+  useEffect(() => {
+    loadIncidents();
+    console.log('PAGINA ATUAL', page);
+    console.log('TOTAL E PAGINAS', totalPage);
+  }, [page]);
+
   return (
     <Container>
       <Header>
         <img src={logo} alt="Be The Hero" />
         <span>
           Bem Vinda,
-          {` ${ongName}`}
+          <h4>{` ${ongName}`}</h4>
         </span>
         <Link to="/incidents/new">Cadastrar um novo caso</Link>
         <Button type="button" onClick={handleLogout}>
@@ -114,7 +112,14 @@ export default function Profile() {
           <FiSkipBack size={24} color="#fff" />
         </Button>
         <p>{page}</p>
-        <Button onClick={() => setPage(page + 1)}>
+        <Button
+          onClick={() => {
+            // console.log('QUANTIDADE DE PAGINAS', pagesQuantity);
+            if (page !== totalPage) {
+              setPage(page + 1);
+            }
+          }}
+        >
           <FiSkipForward size={24} color="#fff" />
         </Button>
       </PageController>

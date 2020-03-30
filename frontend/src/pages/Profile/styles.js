@@ -118,3 +118,39 @@ export const PageController = styled.div`
     background: #e02041;
   }
 `;
+
+export const InfiniteScroll = styled.div`
+  li {
+    background: #fff;
+    padding: 24px;
+    botder-radius: 8px;
+    position: relative;
+
+    button {
+      position: absolute;
+      right: 24px;
+      top: 24px;
+      border: 0;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+
+    strong {
+      display: block;
+      margin-bottom: 16px;
+      color: #41414d;
+    }
+
+    p + strong {
+      margin-top: 32px;
+    }
+
+    p {
+      color: #737380;
+      line-height: 21px;
+      font-size: 16px;
+    }
+  }
+`;

@@ -5,14 +5,15 @@ class ProfileController {
   async index(req, res) {
     const ong_id = req.headers.authorization;
     const { page = 1 } = req.query;
-    const incidents = await Incident.findAll({
+
+    const incidents = await Incident.findAndCountAll({
       where: {
         ong_id,
       },
-      order: ['created_at'],
       limit: 4,
-      offset: (page - 1) * 20,
+      offset: (page - 1) * 4,
     });
+    res.set('totalIncidents', incidents.count);
     return res.json(incidents);
   }
 }
