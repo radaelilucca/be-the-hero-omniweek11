@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { FiArrowLeft } from 'react-icons/fi';
 
@@ -14,13 +14,16 @@ import {
 } from './styles';
 
 import api from '../../services/api';
-
 import logo from '../../assets/logo.svg';
 
 export default function NewIncident() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
+
+  const history = useHistory();
+
+  const ongId = localStorage.getItem('id');
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -35,15 +38,25 @@ export default function NewIncident() {
       setTitle('');
       setDescription('');
       setAmount('');
-      Swal.fire({
+      await Swal.fire({
         title: 'Sucesso',
         text: 'Novo caso cadastrado na base de dados!',
         icon: 'success',
         confirmButtonColor: '#e02041',
         confirmButtonText: 'Ok!',
+      }).then(async (result) => {
+        if (result.value) {
+          history.push('/');
+        }
       });
     } catch (error) {
-      alert('Não foi possível cadastrar o caso. Tente novamente.');
+      Swal.fire({
+        title: 'Que pena =(',
+        text: 'Não foi possível cadastrar o caso. Tente novamente.',
+        icon: 'error',
+        confirmButtonColor: '#e02041',
+        confirmButtonText: 'Okay',
+      });
     }
   }
 

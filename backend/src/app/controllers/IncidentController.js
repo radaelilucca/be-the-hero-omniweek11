@@ -5,9 +5,11 @@ class IncidentController {
   async store(req, res) {
     const { title, description, amount } = req.body;
 
-    const ongId = req.headers.authorization;
+    const { ongId } = req;
 
     const ong = await Ong.findByPk(ongId);
+
+    console.log('ID QUE TA CHEGANDO', ongId);
 
     // check the logged ong
 
@@ -29,7 +31,7 @@ class IncidentController {
 
   async delete(req, res) {
     const { incident_id } = req.params;
-    // const ongId = req.headers.authorization;
+    const ongId = Number(req.ongId);
     const incident = await Incident.findByPk(incident_id);
 
     // check if incident exist
@@ -37,6 +39,12 @@ class IncidentController {
       return res
         .status(404)
         .json({ error: 'Incident not found - Check the ID and try again' });
+    }
+
+    if (Number(incident.ong_id) !== ongId) {
+      return res
+        .status(401)
+        .json({ error: 'Incidents can only be deleted by the creator' });
     }
 
     await incident.destroy();
@@ -47,12 +55,19 @@ class IncidentController {
   // list all incidents
   async index(req, res) {
     const { page = 1 } = req.query;
-    const incidents = await Incident.findAll({
-      order: ['created_at'],
-      offset: (page - 1) * 20,
+    const incidents = await Incident.findAndCountAll({
+      limit: 4,
+      offset: (page - 1) * 4,
+      include: [
+        {
+          model: Ong,
+          as: 'ong',
+          attributes: ['id', 'name', 'city', 'uf', 'whatsapp', 'email'],
+        },
+      ],
     });
-
-    return res.json(incidents);
+    res.set('count', incidents.count);
+    return res.json(incidents.rows);
   }
 }
 

@@ -3,7 +3,7 @@ import Incident from '../models/Incident';
 
 class ProfileController {
   async index(req, res) {
-    const ong_id = req.headers.authorization;
+    const ong_id = req.headers.auth;
     const { page = 1 } = req.query;
 
     const incidents = await Incident.findAndCountAll({

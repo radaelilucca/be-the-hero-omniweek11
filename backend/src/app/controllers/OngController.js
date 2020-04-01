@@ -18,7 +18,7 @@ class OngController {
     }
 
     // Random ID generator
-    const id = Number(cryptoRandomString({ length: 7, type: 'numeric' }));
+    const id = Number(cryptoRandomString({ length: 6, type: 'numeric' }));
 
     await Ong.create({
       name,
