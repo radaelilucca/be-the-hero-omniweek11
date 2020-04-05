@@ -34,6 +34,8 @@ routes.post('/incidents/create', IncidentController.store);
 
 // List incidents of logged ong
 routes.get('/profile', ProfileController.index);
-// Delete / finish incident
+
+// update incident
+routes.put('/incidents/:id', IncidentController.update);
 
 export default routes;

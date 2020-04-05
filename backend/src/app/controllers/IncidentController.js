@@ -29,6 +29,26 @@ class IncidentController {
     return res.json(incident);
   }
 
+  async update(req, res) {
+    const { id } = req.params;
+
+    const incident = await Incident.findByPk(id);
+
+    if (!incident) {
+      return res.status(404).json({ error: 'Case not found' });
+    }
+
+    if (incident.ong_id != req.ongId) {
+      return res
+        .status(401)
+        .json({ error: 'You can only update cases of your ONG' });
+    }
+
+    const { title, description, amount } = await incident.update(req.body);
+
+    return res.json({ title, description, amount });
+  }
+
   async delete(req, res) {
     const { incident_id } = req.params;
     const ongId = Number(req.ongId);
