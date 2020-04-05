@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { Modal } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Feather } from "@expo/vector-icons";
+import LottieView from "lottie-react-native";
+
+import * as loadingAnimationData from "../../assets/loadingAnimation.json";
 
 import {
   Container,
@@ -17,17 +21,21 @@ import {
   DetailsButton,
   DetailsText,
   DetailsIcon,
+  LoadingContainer,
 } from "./styles";
 
 import api from "../../services/api";
 
 import logo from "../../assets/logo.png";
+import Welcome from "../../components/Welcome";
 
 export default function Incidents() {
   const [incidents, setIncidents] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [total, setTotal] = useState(0);
+
+  const [modalVisible, setModalVisible] = useState(true);
 
   const navigation = useNavigation();
 
@@ -49,21 +57,30 @@ export default function Incidents() {
       params: { page },
     });
 
-    console.tron.log("resposta: ", response);
     setIncidents([...incidents, ...response.data]);
     setTotal(response.headers.count);
-    console.tron.log(total);
-
     setPage(page + 1);
-    setLoading(false);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
   }
 
   useEffect(() => {
     loadIncidents();
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setModalVisible(false);
+    }, 5000);
+  }, []);
+
   return (
     <Container>
+      <Modal animationType="fade" transparent={false} visible={modalVisible}>
+        <Welcome />
+      </Modal>
       <Header>
         <Logo source={logo} />
         <HeaderText>
@@ -79,7 +96,7 @@ export default function Incidents() {
         keyExtractor={(incident) => String(incident.id)}
         showsVerticalScrollIndicator={false}
         onEndReached={loadIncidents}
-        onEndReachedThreshold={0.5}
+        onEndReachedThreshold={0.6}
         renderItem={({ item: incident }) => (
           <Incident>
             <OngProperty>ONG:</OngProperty>
@@ -106,6 +123,22 @@ export default function Incidents() {
           </Incident>
         )}
       ></IncidentsList>
+
+      {loading && (
+        <LoadingContainer>
+          <LottieView
+            style={{
+              width: 520,
+              height: 100,
+            }}
+            source={loadingAnimationData}
+            autoPlay={true}
+            speed={1.5}
+            resizeMode={"contain"}
+            autoSize
+          />
+        </LoadingContainer>
+      )}
     </Container>
   );
 }

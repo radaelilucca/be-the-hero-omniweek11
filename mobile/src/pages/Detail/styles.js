@@ -34,9 +34,10 @@ export const Incident = styled.View`
 `;
 export const OngProperty = styled.Text`
   font-size: 18px;
-  font-weight: 600;
+  font-weight: bold;
   line-height: 20px;
   margin-bottom: 8px;
+  color: #41414d;
 `;
 
 export const PropertyValue = styled.Text`
@@ -53,27 +54,29 @@ export const ContactBox = styled.View`
 
 export const Title = styled.Text`
   font-size: 22px;
-  font-weight: 600;
+  font-weight: bold;
   line-height: 40px;
+  color: #41414d;
 `;
 
 export const CallToAction = styled.Text`
   font-size: 16px;
   font-weight: 500;
-  line-height: 40px;
+  line-height: 30px;
 `;
 
 export const Actions = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-top: 15px;
 `;
 
 export const ActionButton = styled.TouchableOpacity`
   background: #e02041;
   height: 50px;
   width: 48%;
-  border-radius: 8;
+  border-radius: 15;
   justify-content: center;
   align-items: center;
 `;

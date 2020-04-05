@@ -2,6 +2,8 @@ import React from "react";
 import { Linking } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import * as MailComposer from "expo-mail-composer";
+import { Feather } from "@expo/vector-icons";
+
 import {
   Container,
   Header,
@@ -56,7 +58,7 @@ export default function Detail() {
       <Header>
         <Logo source={logo} />
         <BackButton onPress={navigateToDetail}>
-          <BackIcon>+</BackIcon>
+          <Feather size={28} color={"#e02041"} name={"arrow-left"} />
         </BackButton>
       </Header>
 
@@ -68,7 +70,13 @@ export default function Detail() {
         <OngProperty>CASO:</OngProperty>
         <PropertyValue>{incident.title}</PropertyValue>
         <OngProperty>VALOR</OngProperty>
-        <PropertyValue></PropertyValue>
+        <PropertyValue>
+          {" "}
+          {Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          }).format(incident.amount)}{" "}
+        </PropertyValue>
       </Incident>
 
       <ContactBox>

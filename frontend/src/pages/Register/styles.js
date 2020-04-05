@@ -52,9 +52,31 @@ export const Section = styled.section`
 export const Form = styled.form`
   width: 100%;
   max-width: 450px;
+
+  .phone {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8px;
+
+    svg {
+      width: 50px;
+      height: 50px;
+      display: none;
+    }
+    select {
+      width: 50px;
+      display: none;
+    }
+  }
 `;
 export const Input = styled.input`
   margin-top: 8px;
+`;
+export const Select = styled.select`
+  margin-top: 8px;
+  border-radius: 15px;
 `;
 export const InputGroup = styled.div`
   display: flex;

@@ -25,6 +25,7 @@ export const Form = styled.form`
   h1 {
     font-size: 32px;
     margin-bottom: 32px;
+    color: #41414d;
   }
 
   a {
@@ -51,7 +52,7 @@ export const Button = styled.button`
   height: 60px;
   background: #e02041;
   border: 0;
-  border-radius: 8px;
+  border-radius: 15px;
   color: #fff;
   font-weight: bold;
   margin-top: 16px;

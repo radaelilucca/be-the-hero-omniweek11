@@ -21,12 +21,13 @@ routes.post('/sessions/:id', SessionController.store);
 // List all incidents
 routes.get('/incidents/', IncidentController.index);
 
+// List all ongs
+routes.get('/ongs', OngController.index);
+
 // ------------------- Login required routes ---------------------
 routes.use(authMiddleware);
 
 routes.delete('/incidents/delete/:incident_id', IncidentController.delete);
-// List all ongs
-routes.get('/ongs', OngController.index);
 
 // Create incident
 routes.post('/incidents/create', IncidentController.store);

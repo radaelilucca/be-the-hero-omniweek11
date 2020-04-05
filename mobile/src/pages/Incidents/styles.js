@@ -12,13 +12,14 @@ export const Header = styled.View`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 40px;
+  margin-top: 30px;
 `;
 export const Logo = styled.Image`
   width: 120px;
   height: 40px;
 `;
 export const HeaderText = styled.Text`
-  font-size: 16px;
+  font-size: 18px;
   color: #333;
 `;
 export const CaseCount = styled.Text`
@@ -29,6 +30,7 @@ export const WelcomeText = styled.Text`
   font-size: 32px;
   font-weight: bold;
   line-height: 55px;
+  color: #41414d;
 `;
 export const IntroductionText = styled.Text`
   font-size: 16px;
@@ -74,4 +76,12 @@ export const DetailsIcon = styled.Text`
   font-weight: bold;
   line-height: 20px;
   color: #e02041;
+`;
+
+export const LoadingContainer = styled.View`
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 5;
 `;

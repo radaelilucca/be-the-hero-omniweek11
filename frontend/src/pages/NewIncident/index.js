@@ -21,9 +21,9 @@ export default function NewIncident() {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
 
-  const history = useHistory();
-
   const ongId = localStorage.getItem('id');
+
+  const history = useHistory();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -34,7 +34,11 @@ export default function NewIncident() {
     };
 
     try {
-      api.post(`/incidents/create`, data);
+      api.post(`/incidents/create`, data, {
+        headers: {
+          auth: ongId,
+        },
+      });
       setTitle('');
       setDescription('');
       setAmount('');
