@@ -39,12 +39,14 @@ export default function NewIncident() {
           auth: ongId,
         },
       });
+
       setTitle('');
       setDescription('');
       setAmount('');
+
       await Swal.fire({
-        title: 'Sucesso',
-        text: 'Novo caso cadastrado na base de dados!',
+        title: 'Sucesso 👍',
+        text: 'Caso cadastrado na base de dados!',
         icon: 'success',
         confirmButtonColor: '#e02041',
         confirmButtonText: 'Ok!',
@@ -55,8 +57,8 @@ export default function NewIncident() {
       });
     } catch (error) {
       Swal.fire({
-        title: 'Que pena =(',
-        text: 'Não foi possível cadastrar o caso. Tente novamente.',
+        title: 'Que pena 😢',
+        text: 'Não foi possível cadastrar o caso. Tente novamente. ',
         icon: 'error',
         confirmButtonColor: '#e02041',
         confirmButtonText: 'Okay',
@@ -84,16 +86,22 @@ export default function NewIncident() {
             placeholder="Título do Caso"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            required
+            minLength={3}
           />
           <TextArea
             placeholder="Descrição do Caso"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            required
+            minLength={3}
           />
           <Input
             placeholder="Valor em Reais"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
+            required
+            minLength={3}
           />
 
           <Button type="submit">Cadastrar</Button>

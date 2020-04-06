@@ -2,13 +2,16 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  max-width: 1120px;
-  height: 100vh;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  max-width: 1180px;
+  padding: 30px;
+  margin: 52px auto;
+
+  h1 {
+    margin-top: 36px;
+    margin-bottom: 15px;
+  }
 `;
+
 export const Content = styled.div`
   width: 100%;
   padding: 96px;
@@ -18,6 +21,7 @@ export const Content = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 80px;
 `;
 
 export const Section = styled.section`

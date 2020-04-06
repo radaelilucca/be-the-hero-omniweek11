@@ -1,10 +1,19 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { FiTrash2 } from 'react-icons/fi';
+import { useHistory } from 'react-router-dom';
+import { FiTrash2, FiEdit } from 'react-icons/fi';
 
-import { Container, CaseProperty, PropertyValue } from './styles';
+import {
+  Container,
+  CaseProperty,
+  PropertyValue,
+  EditButton,
+  DeleteButton,
+} from './styles';
 
 export default function IncidentCard({ incident, handleDeleteIncident }) {
+  const history = useHistory();
+
   return (
     <Container>
       <li key={incident.id}>
@@ -20,7 +29,7 @@ export default function IncidentCard({ incident, handleDeleteIncident }) {
           }).format(incident.amount)}
         </PropertyValue>
 
-        <button type="button">
+        <DeleteButton type="button">
           <FiTrash2
             size={20}
             color="red"
@@ -28,7 +37,16 @@ export default function IncidentCard({ incident, handleDeleteIncident }) {
               handleDeleteIncident(incident.id, incident.title);
             }}
           />
-        </button>
+        </DeleteButton>
+        <EditButton type="button">
+          <FiEdit
+            size={20}
+            color="red"
+            onClick={() => {
+              history.push(`/incidents/update/${incident.id}`);
+            }}
+          />
+        </EditButton>
       </li>
     </Container>
   );

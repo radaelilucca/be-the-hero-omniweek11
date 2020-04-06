@@ -46,12 +46,12 @@ export default function Welcome() {
         pequenas surgem todos os dias."
           color="#41414d"
           textSize={24}
-          typingAnimationDuration={20}
+          typingAnimationDuration={15}
         />
       </ModalQuote>
 
       {renderDelay ? (
-        <FadeInView duration={2500}>
+        <FadeInView duration={1500}>
           <ModalCallToAction>Seja um herói!</ModalCallToAction>
         </FadeInView>
       ) : (

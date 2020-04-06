@@ -81,6 +81,8 @@ export default function Register() {
           <Input
             placeholder="Nome da ONG"
             value={name}
+            required
+            minLength={3}
             onChange={(e) => {
               setName(e.target.value);
             }}
@@ -88,6 +90,7 @@ export default function Register() {
           <Input
             placeholder="E-mail"
             value={email}
+            required
             onChange={(e) => {
               setEmail(e.target.value);
             }}
@@ -95,6 +98,7 @@ export default function Register() {
           <PhoneInput
             className="phone"
             placeholder="WhatsApp com DDD"
+            required
             value={whatsapp && formatPhoneNumberIntl(whatsapp)}
             onChange={setWhatsapp}
             defaultCountry="BR"
@@ -103,6 +107,7 @@ export default function Register() {
             <Input
               placeholder="Cidade"
               value={city}
+              required
               onChange={(e) => {
                 setCity(e.target.value);
               }}

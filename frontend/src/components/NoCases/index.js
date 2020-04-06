@@ -15,7 +15,7 @@ export default function NoCases() {
       </NotFoundContainer>
       <Title> Parece que sua ONG não possui nenhum caso.</Title>
       <Description>
-        Regristre novos casos e encontre heróis agora mesmo!
+        Cadastre um novo caso e encontre logo novos Heróis!
       </Description>
     </Container>
   );

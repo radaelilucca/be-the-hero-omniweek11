@@ -1,3 +1,4 @@
+import * as yup from 'yup';
 import Ong from '../models/Ong';
 import Incident from '../models/Incident';
 
@@ -5,11 +6,19 @@ class IncidentController {
   async store(req, res) {
     const { title, description, amount } = req.body;
 
+    const schema = yup.object().shape({
+      title: yup.string().required().min(3),
+      description: yup.string().required().min(3),
+      amount: yup.string().required().min(1),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(401).json({ error: 'Validation fails' });
+    }
+
     const { ongId } = req;
 
     const ong = await Ong.findByPk(ongId);
-
-    console.log('ID QUE TA CHEGANDO', ongId);
 
     // check the logged ong
 
@@ -32,13 +41,15 @@ class IncidentController {
   async update(req, res) {
     const { id } = req.params;
 
+    console.log('ASMDASDOPASD', req.ongId);
+
     const incident = await Incident.findByPk(id);
 
     if (!incident) {
       return res.status(404).json({ error: 'Case not found' });
     }
 
-    if (incident.ong_id != req.ongId) {
+    if (incident.ong_id != req.headers.auth) {
       return res
         .status(401)
         .json({ error: 'You can only update cases of your ONG' });

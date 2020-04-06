@@ -73,7 +73,7 @@ export default function Incidents() {
   useEffect(() => {
     setTimeout(() => {
       setModalVisible(false);
-    }, 5000);
+    }, 4000);
   }, []);
 
   return (
@@ -93,10 +93,10 @@ export default function Incidents() {
       </IntroductionText>
       <IncidentsList
         data={incidents}
-        keyExtractor={(incident) => String(incident.id)}
+        keyExtractor={(item) => String(item.id)}
         showsVerticalScrollIndicator={false}
         onEndReached={loadIncidents}
-        onEndReachedThreshold={0.6}
+        onEndReachedThreshold={0.1}
         renderItem={({ item: incident }) => (
           <Incident>
             <OngProperty>ONG:</OngProperty>
