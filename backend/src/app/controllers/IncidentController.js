@@ -41,8 +41,6 @@ class IncidentController {
   async update(req, res) {
     const { id } = req.params;
 
-    console.log('ASMDASDOPASD', req.ongId);
-
     const incident = await Incident.findByPk(id);
 
     if (!incident) {
