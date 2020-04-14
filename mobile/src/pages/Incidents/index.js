@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Modal } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Feather } from "@expo/vector-icons";
-import LottieView from "lottie-react-native";
 
 import * as loadingAnimationData from "../../assets/loadingAnimation.json";
 
@@ -21,7 +20,6 @@ import {
   DetailsButton,
   DetailsText,
   DetailsIcon,
-  LoadingContainer,
 } from "./styles";
 
 import api from "../../services/api";
@@ -47,33 +45,32 @@ export default function Incidents() {
     if (loading) {
       return;
     }
+
     if (total > 0 && incidents.length === total) {
       return;
     }
 
     setLoading(true);
 
-    const response = await api.get("/incidents", {
+    const response = await api.get("incidents", {
       params: { page },
     });
 
     setIncidents([...incidents, ...response.data]);
     setTotal(response.headers.count);
     setPage(page + 1);
-
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+    setLoading(false);
   }
 
   useEffect(() => {
     loadIncidents();
   }, []);
 
+  // welcome modal
   useEffect(() => {
     setTimeout(() => {
       setModalVisible(false);
-    }, 4000);
+    }, 4500);
   }, []);
 
   return (
@@ -96,7 +93,7 @@ export default function Incidents() {
         keyExtractor={(item) => String(item.id)}
         showsVerticalScrollIndicator={false}
         onEndReached={loadIncidents}
-        onEndReachedThreshold={0.1}
+        onEndReachedThreshold={0.2}
         renderItem={({ item: incident }) => (
           <Incident>
             <OngProperty>ONG:</OngProperty>
@@ -123,22 +120,6 @@ export default function Incidents() {
           </Incident>
         )}
       ></IncidentsList>
-
-      {loading && (
-        <LoadingContainer>
-          <LottieView
-            style={{
-              width: 520,
-              height: 100,
-            }}
-            source={loadingAnimationData}
-            autoPlay={true}
-            speed={1.5}
-            resizeMode={"contain"}
-            autoSize
-          />
-        </LoadingContainer>
-      )}
     </Container>
   );
 }

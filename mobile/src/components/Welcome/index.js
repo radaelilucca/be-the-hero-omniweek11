@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { View } from "react-native";
 import LottieView from "lottie-react-native";
 import TypingText from "react-native-typing-text";
 import FadeInView from "react-native-fade-in-view";
@@ -12,6 +11,7 @@ import {
   ModalQuote,
   ModalCallToAction,
   AnimationContainer,
+  LoadingText,
 } from "./styles";
 
 import logo from "../../assets/logo.png";
@@ -27,6 +27,7 @@ export default function Welcome() {
   return (
     <Container>
       <ModalLogo source={logo} />
+      <LoadingText>Carregando...</LoadingText>
       <AnimationContainer>
         <FadeInView>
           <LottieView

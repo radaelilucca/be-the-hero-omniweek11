@@ -10,8 +10,16 @@ export const Container = styled.View`
 `;
 
 export const ModalLogo = styled.Image`
-  width: 220px;
-  height: 80px;
+  width: 240px;
+  height: 100px;
+`;
+
+export const LoadingText = styled.Text`
+  margin-top: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #41414d;
+  opacity: 0.8;
 `;
 
 export const AnimationContainer = styled.View`

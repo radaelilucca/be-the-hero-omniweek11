@@ -33,7 +33,7 @@ export default function Detail() {
   }" com o valor de ${Intl.NumberFormat("pt-BR", {
     style: "currency",
     currency: "BRL",
-  }).format(incident.amount)}!`;
+  }).format(incident.amount)}! Como devo proceder?!`;
 
   function navigateToDetail() {
     navigation.navigate("Incidents");

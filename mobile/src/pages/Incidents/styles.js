@@ -77,11 +77,3 @@ export const DetailsIcon = styled.Text`
   line-height: 20px;
   color: #e02041;
 `;
-
-export const LoadingContainer = styled.View`
-  height: 50px;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  z-index: 5;
-`;
