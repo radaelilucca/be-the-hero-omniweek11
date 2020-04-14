@@ -7,6 +7,17 @@ export const Container = styled.View`
   padding-top: ${Constants.statusBarHeight + 15};
   background: #efefef;
 `;
+
+export const LoadingAnimationContainer = styled.View`
+  height: 50px;
+  width: 100%;
+  align-items: center;
+  position: absolute;
+  z-index: 2;
+  top: 98%;
+  left: 6%;
+`;
+
 export const Header = styled.View`
   flex-direction: row;
   justify-content: space-between;
@@ -45,29 +56,28 @@ export const Incident = styled.View`
   background: #fff;
   margin-top: 22px;
   padding: 20px;
+  height: 260px;
 `;
 export const OngProperty = styled.Text`
-  font-size: 18px;
+  font-size: 20px;
+  margin-bottom: 5px;
+  margin-top: 5px;
   font-weight: bold;
-  line-height: 20px;
-  margin-bottom: 8px;
 `;
 
 export const PropertyValue = styled.Text`
   font-size: 16px;
-  line-height: 20px;
-  margin-bottom: 15px;
 `;
 export const DetailsButton = styled.TouchableOpacity`
   flex: 1;
   flex-direction: row;
-  margin-top: 10px;
+
   justify-content: space-between;
   align-items: center;
 `;
 export const DetailsText = styled.Text`
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 500;
   line-height: 20px;
   color: #e02041;
 `;

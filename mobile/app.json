@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "Be The Hero",
+    "name": "BeTheHero",
     "slug": "bethehero",
     "privacy": "public",
     "sdkVersion": "36.0.0",
-    "platforms": ["ios", "android", "web"],
+    "platforms": ["android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -17,8 +17,10 @@
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": ["**/*"],
-    "ios": {
-      "supportsTablet": true
+
+    "android": {
+      "package": "com.radaelidev.bethehero",
+      "versionCode": 1
     }
   }
 }

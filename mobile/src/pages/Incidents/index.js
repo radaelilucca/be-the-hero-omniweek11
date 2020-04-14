@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Modal } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import LottieView from "lottie-react-native";
+
 import { Feather } from "@expo/vector-icons";
 
-import * as loadingAnimationData from "../../assets/loadingAnimation.json";
+import * as loadingData from "../../assets/loadingAnimation.json";
 
 import {
   Container,
@@ -20,6 +22,7 @@ import {
   DetailsButton,
   DetailsText,
   DetailsIcon,
+  LoadingAnimationContainer,
 } from "./styles";
 
 import api from "../../services/api";
@@ -32,7 +35,6 @@ export default function Incidents() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [total, setTotal] = useState(0);
-
   const [modalVisible, setModalVisible] = useState(true);
 
   const navigation = useNavigation();
@@ -45,21 +47,21 @@ export default function Incidents() {
     if (loading) {
       return;
     }
-
-    if (total > 0 && incidents.length === total) {
-      return;
-    }
-
     setLoading(true);
 
     const response = await api.get("incidents", {
       params: { page },
     });
-
-    setIncidents([...incidents, ...response.data]);
     setTotal(response.headers.count);
+
+    if (total > 0 && incidents.length === total) {
+      return;
+    }
+    setIncidents([...incidents, ...response.data]);
     setPage(page + 1);
-    setLoading(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 700);
   }
 
   useEffect(() => {
@@ -70,7 +72,7 @@ export default function Incidents() {
   useEffect(() => {
     setTimeout(() => {
       setModalVisible(false);
-    }, 4500);
+    }, 4300);
   }, []);
 
   return (
@@ -90,10 +92,9 @@ export default function Incidents() {
       </IntroductionText>
       <IncidentsList
         data={incidents}
-        keyExtractor={(item) => String(item.id)}
         showsVerticalScrollIndicator={false}
         onEndReached={loadIncidents}
-        onEndReachedThreshold={0.2}
+        onEndReachedThreshold={0.4}
         renderItem={({ item: incident }) => (
           <Incident>
             <OngProperty>ONG:</OngProperty>
@@ -119,7 +120,22 @@ export default function Incidents() {
             </DetailsButton>
           </Incident>
         )}
-      ></IncidentsList>
+        keyExtractor={(incident) => String(incident.id)}
+      />
+      {loading && (
+        <LoadingAnimationContainer>
+          <LottieView
+            style={{
+              width: 100,
+              height: 90,
+            }}
+            source={loadingData}
+            autoPlay={true}
+            speed={2}
+            resizeMode="cover"
+          />
+        </LoadingAnimationContainer>
+      )}
     </Container>
   );
 }
